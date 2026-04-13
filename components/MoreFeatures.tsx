@@ -1,6 +1,6 @@
 import React from 'react';
 import { PhoneMockup } from './PhoneMockup';
-import { User, RefreshCw, Zap, Lock, Layers, Headphones, ChevronRight, CreditCard, PieChart, Wallet } from 'lucide-react';
+import { User, RefreshCw, Zap, Lock, Layers, Headphones, ChevronRight, CreditCard, PieChart, Wallet, Repeat2, Bell, TrendingUp, Bitcoin } from 'lucide-react';
 
 // Tela simulada de Menu/Gestão (Modo Escuro)
 const ManagementScreen = () => (
@@ -83,7 +83,18 @@ const FeatureGridItem = ({ icon: Icon, title, description, colorClass }: { icon:
 
 export const MoreFeatures: React.FC = () => {
     return (
-        <section className="relative py-24 overflow-hidden min-h-[800px] flex flex-col justify-center" style={{ backgroundImage: "url('/Funcionalidades-fundo.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <section className="relative py-24 overflow-hidden min-h-[800px] flex flex-col justify-center">
+            {/* Background video */}
+            <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ zIndex: 0 }}
+                src="/videos/video_funcionalidades.mp4"
+            />
+
             {/* Background Shape Left (Cyan Blob) */}
             <div className="absolute top-0 left-0 w-[60%] h-full bg-cyan-400/5 rounded-br-[100px] -z-10 hidden md:block" />
             
@@ -99,13 +110,12 @@ export const MoreFeatures: React.FC = () => {
                 </svg>
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative" style={{ zIndex: 2 }}>
                 <div className="flex flex-col md:flex-row-reverse items-center gap-16">
                     
                     {/* Left Side: Phone Mockup with Background Blob */}
                     <div className="w-full md:w-1/2 relative flex justify-center md:justify-start">
-                        {/* Organic Blue Shape Background */}
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[120%] h-[100%] md:w-[500px] md:h-[500px] bg-[#00d2ff] rounded-[30%_70%_70%_30%_/_30%_30%_70%_70%] opacity-90 -z-10 animate-float-delayed"></div>
+                        {/* Phone Mockup */}
                         
                         <div className="transform md:translate-x-12">
                              <PhoneMockup className="shadow-2xl">
@@ -125,40 +135,40 @@ export const MoreFeatures: React.FC = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
                             <FeatureGridItem 
-                                icon={User} 
+                                icon={CreditCard} 
                                 colorClass="text-cyan-500"
-                                title="Fácil de Usar" 
-                                description="Interface limpa projetada para que você faça lançamentos e consultas em segundos."
+                                title="Controle de Parcelas" 
+                                description="Acompanhe cada parcela dos seus débitos e saiba exatamente quando cada uma vence."
                             />
                             <FeatureGridItem 
-                                icon={RefreshCw} 
+                                icon={Wallet} 
                                 colorClass="text-cyan-500"
-                                title="Atualização Rápida" 
-                                description="Sincronização bancária em tempo real para que seus saldos estejam sempre corretos."
+                                title="Todos os Cartões" 
+                                description="Centralize todos os seus cartões em um único lugar e visualize faturas e limites facilmente."
+                            />
+                            <FeatureGridItem 
+                                icon={Repeat2} 
+                                colorClass="text-cyan-500"
+                                title="Controle de Assinaturas" 
+                                description="Gerencie todas as suas assinaturas recorrentes e evite cobranças indesejadas."
+                            />
+                            <FeatureGridItem 
+                                icon={PieChart} 
+                                colorClass="text-cyan-500"
+                                title="Gastos e Entradas" 
+                                description="Controle completo das suas receitas e despesas com categorias personalizáveis."
                             />
                             <FeatureGridItem 
                                 icon={Zap} 
                                 colorClass="text-cyan-500"
-                                title="Alta Performance" 
-                                description="Carregamento instantâneo de gráficos complexos e relatórios de investimento."
+                                title="Análise Inteligente com IA" 
+                                description="Módulos de análise financeira com inteligência artificial para insights personalizados."
                             />
-                             <FeatureGridItem 
-                                icon={Lock} 
+                            <FeatureGridItem 
+                                icon={Bitcoin} 
                                 colorClass="text-cyan-500"
-                                title="100% Seguro" 
-                                description="Criptografia de ponta a ponta e autenticação biométrica para sua tranquilidade."
-                            />
-                             <FeatureGridItem 
-                                icon={Layers} 
-                                colorClass="text-cyan-500"
-                                title="Gestão Completa" 
-                                description="Controle cartões, contas correntes e metas de economia em um único lugar."
-                            />
-                             <FeatureGridItem 
-                                icon={Headphones} 
-                                colorClass="text-cyan-500"
-                                title="Suporte 24/7" 
-                                description="Nossa equipe de especialistas está sempre pronta para ajudar você."
+                                title="Investimentos e Cripto" 
+                                description="Controle e gerencie seus investimentos e criptoativos em um painel unificado."
                             />
                         </div>
 

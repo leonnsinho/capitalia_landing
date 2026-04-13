@@ -6,94 +6,105 @@ export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <nav 
-      className={`fixed z-50 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-        scrolled 
-          ? 'top-4 left-4 right-4 md:left-1/2 md:right-auto md:-translate-x-1/2 md:w-[90%] max-w-6xl rounded-full bg-white/80 backdrop-blur-lg shadow-lg shadow-emerald-500/5 border border-white/20 py-3' 
-          : 'top-0 left-0 right-0 w-full bg-transparent py-6'
-      }`}
-    >
-      <div className={`mx-auto px-4 sm:px-8 h-full flex flex-col justify-center ${scrolled ? 'max-w-none' : 'max-w-7xl'}`}>
-        <div className="flex justify-between items-center">
-          
-          {/* Logo */}
-          <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer">
-            <img src="/capitalia_logo.png" alt="Capitalia" className="h-9 w-auto object-contain" />
-          </div>
+    <nav className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-1">
-            {['Home', 'Funcionalidades', 'Sobre', 'Blog', 'Contato'].map((item) => (
-              <a 
-                key={item}
-                href={`#${item.toLowerCase()}`} 
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  scrolled 
-                    ? 'text-gray-600 hover:text-emerald-600 hover:bg-emerald-50' 
-                    : 'text-gray-600 hover:text-emerald-600 hover:bg-white/50'
+      {/* Inner pill — animates visually, never moves in the DOM */}
+      <div
+        className={`
+          mx-auto flex items-center justify-between
+          transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+          ${scrolled
+            ? 'max-w-5xl rounded-2xl bg-white/80 backdrop-blur-xl shadow-xl shadow-black/5 border border-gray-100 px-5 py-3'
+            : 'max-w-7xl rounded-none bg-transparent border-transparent px-2 py-3'
+          }
+        `}
+      >
+        {/* Logo */}
+        <div className="flex-shrink-0 flex items-center gap-2.5 cursor-pointer">
+          <img src="/capitalia_logo.png" alt="Capitalia" className="h-11 w-auto object-contain" />
+          <span className="text-2xl font-bold tracking-tight" style={{ fontFamily: 'Rowdies, sans-serif' }}>
+            CAPITAL<span className="text-emerald-500">IA</span>
+          </span>
+        </div>
+
+        {/* Desktop links */}
+        <div className="hidden md:flex items-center gap-1">
+          {['Home', 'IA', 'Funcionalidades', 'Interface', 'Planos'].map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200
+                ${scrolled
+                  ? 'text-gray-500 hover:text-emerald-600 hover:bg-emerald-50'
+                  : 'text-gray-700 hover:text-emerald-600 hover:bg-white/60'
                 }`}
-              >
-                {item}
-              </a>
-            ))}
-          </div>
-
-          <div className="hidden md:flex items-center">
-             <button className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg ${
-                 scrolled 
-                 ? 'bg-emerald-500 text-white hover:bg-emerald-600 shadow-emerald-500/20' 
-                 : 'bg-gray-900 text-white hover:bg-gray-800'
-             }`}>
-              Baixar App
-            </button>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-600 hover:text-emerald-500 focus:outline-none p-2 bg-transparent"
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+              {item}
+            </a>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="hidden md:flex items-center gap-3">
+          <a
+            href="https://capitaliahealth.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 hover:scale-105 active:scale-95
+              ${scrolled
+                ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/25 hover:bg-emerald-600'
+                : 'bg-gray-900 text-white shadow-md hover:bg-gray-800'
+              }`}
+          >
+            <img src="/play-store.png" alt="Play Store" className="w-4 h-4 object-contain" />
+            Baixar App
+          </a>
+        </div>
+
+        {/* Mobile burger */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden p-2 rounded-xl text-gray-600 hover:text-emerald-500 hover:bg-emerald-50 transition-colors"
+        >
+          {isOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </div>
+
+      {/* Mobile dropdown */}
+      <div
+        className={`md:hidden mx-auto max-w-5xl transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden
+          ${isOpen ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0'}`}
+      >
+        <div className="bg-white/90 backdrop-blur-xl border border-gray-100 shadow-xl rounded-2xl p-3 space-y-1">
+          {['Home', 'IA', 'Funcionalidades', 'Interface', 'Planos'].map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className="block px-4 py-3 text-sm font-medium text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              {item}
+            </a>
+          ))}
+          <div className="pt-1 pb-1">
+            <a
+              href="https://capitaliahealth.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full text-center bg-emerald-500 text-white px-6 py-3 rounded-xl font-bold text-sm shadow hover:bg-emerald-600 transition-colors"
+            >
+              Baixar App
+            </a>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
-      <div 
-        className={`md:hidden absolute left-0 w-full transition-all duration-300 ease-in-out overflow-hidden ${
-          isOpen 
-            ? 'opacity-100 translate-y-2 pointer-events-auto' 
-            : 'opacity-0 -translate-y-4 pointer-events-none'
-        } ${scrolled ? 'px-0 top-full' : 'px-4 top-20'}`}
-      >
-          <div className={`bg-white/90 backdrop-blur-xl border border-white/20 shadow-xl rounded-2xl p-4 space-y-2 ${scrolled ? 'mx-0 mt-2' : 'mx-0'}`}>
-            {['Home', 'Funcionalidades', 'Sobre', 'Blog', 'Contato'].map((item) => (
-               <a 
-                key={item}
-                href={`#${item.toLowerCase()}`} 
-                className="block px-4 py-3 text-base font-medium text-gray-600 hover:text-emerald-500 hover:bg-emerald-50 rounded-xl transition-colors"
-                onClick={() => setIsOpen(false)}
-               >
-                 {item}
-               </a>
-            ))}
-            <div className="pt-2">
-                <button className="w-full bg-emerald-500 text-white px-6 py-3 rounded-xl font-bold shadow-md hover:bg-emerald-600 transition-colors">
-                  Baixar Agora
-                </button>
-            </div>
-          </div>
-        </div>
     </nav>
   );
 };

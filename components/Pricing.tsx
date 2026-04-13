@@ -15,6 +15,7 @@ const plans = [
     borderClass: 'animate-silver-border',
     features: [
       { text: 'Assistente IA (limitado)', included: true,  isAi: true },
+      { text: '50.000 tokens/mês',         included: true,  isAi: true },
       { text: 'Controle de gastos básico', included: true  },
       { text: 'Dashboard simplificado',    included: true  },
       { text: 'Múltiplos cartões',         included: false },
@@ -40,6 +41,7 @@ const plans = [
     borderClass: 'animate-gold-border',
     features: [
       { text: 'IA Financeira Pessoal',        included: true, isAi: true  },
+      { text: '1.200.000 tokens/mês',          included: true, isAi: true  },
       { text: 'Análise inteligente de gastos', included: true, isAi: true  },
       { text: 'Planejamento & Metas',          included: true              },
       { text: 'Consultor de compras',          included: true              },
@@ -64,6 +66,7 @@ const plans = [
     borderClass: 'animate-emerald-border',
     features: [
       { text: 'IA Financeira Pessoal',        included: true, isAi: true  },
+      { text: '1.200.000 tokens/mês',          included: true, isAi: true  },
       { text: 'Análise inteligente de gastos', included: true, isAi: true  },
       { text: 'Planejamento & Metas',          included: true              },
       { text: 'Consultor de compras',          included: true              },
