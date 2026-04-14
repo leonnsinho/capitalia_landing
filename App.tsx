@@ -17,9 +17,10 @@ function App() {
 
     const updateScales = () => {
       const vh = window.innerHeight;
-      wrapperRefs.current.forEach((el, i) => {
-        if (!el) return;
-        const nextEl = wrapperRefs.current[i + 1];
+      // Filter to only the actual wrapped elements (skip nulls from non-wrapped sections)
+      const validEls = wrapperRefs.current.filter((el): el is HTMLDivElement => el !== null);
+      validEls.forEach((el, i) => {
+        const nextEl = validEls[i + 1];
         if (!nextEl) return;
 
         const nextTop = nextEl.getBoundingClientRect().top;
@@ -86,9 +87,12 @@ function App() {
       {wrap(<MoreFeatures />, 2)}
       {wrap(<VideoSection />, 3)}
       {wrap(<Screenshots />, 4)}
-      {wrap(<Pricing />, 5)}
-      {wrap(<Testimonials />, 6)}
-      {wrap(<Footer />, 7)}
+      {/* Pricing scrolls normally — too tall to fit in a single viewport card */}
+      <div style={{ position: 'relative', zIndex: 6 }}>
+        <Pricing />
+      </div>
+      {wrap(<Testimonials />, 5)}
+      {wrap(<Footer />, 6)}
     </div>
   );
 }

@@ -1,7 +1,69 @@
-import React from 'react';
-import { Zap, CreditCard, PieChart, Wallet, Repeat2, Bitcoin, Play } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Zap, CreditCard, PieChart, Wallet, Repeat2, Bitcoin, Play, X } from 'lucide-react';
 
-const FeatureGridItem = ({ icon: Icon, title, description, colorClass, number }: { icon: any, title: string, description: string, colorClass: string, number: number }) => (
+// ---------------------------------------------------------------------------
+// YouTube Modal
+// ---------------------------------------------------------------------------
+const VideoModal = ({ videoId, title, onClose }: { videoId: string; title: string; onClose: () => void }) => {
+    useEffect(() => {
+        const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+        document.addEventListener('keydown', onKey);
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.removeEventListener('keydown', onKey);
+            document.body.style.overflow = '';
+        };
+    }, [onClose]);
+
+    return (
+        <div
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+            onClick={onClose}
+        >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
+
+            {/* Dialog */}
+            <div
+                className="relative w-full max-w-3xl rounded-2xl overflow-hidden shadow-2xl"
+                onClick={e => e.stopPropagation()}
+            >
+                {/* Header */}
+                <div className="flex items-center justify-between bg-gray-900 px-5 py-3">
+                    <span className="text-white font-semibold text-sm truncate">{title}</span>
+                    <button
+                        onClick={onClose}
+                        className="text-gray-400 hover:text-white transition-colors ml-4 shrink-0"
+                        aria-label="Fechar"
+                    >
+                        <X className="w-5 h-5" />
+                    </button>
+                </div>
+
+                {/* 16:9 iframe */}
+                <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                    <iframe
+                        className="absolute inset-0 w-full h-full"
+                        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
+                        title={title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                    />
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// ---------------------------------------------------------------------------
+// Feature card
+// ---------------------------------------------------------------------------
+const FeatureGridItem = ({
+    icon: Icon, title, description, colorClass, number, videoId, onDemo,
+}: {
+    icon: any; title: string; description: string; colorClass: string;
+    number: number; videoId: string; onDemo: (id: string, title: string) => void;
+}) => (
     <div className="relative flex flex-col items-start bg-white/85 backdrop-blur-sm rounded-2xl p-5 shadow-sm">
         <div className="absolute -top-3 -left-3 w-7 h-7 rounded-full bg-emerald-500 text-white text-xs font-black flex items-center justify-center shadow-md">
             {number}
@@ -9,7 +71,10 @@ const FeatureGridItem = ({ icon: Icon, title, description, colorClass, number }:
         <Icon className={`w-7 h-7 mb-3 ${colorClass}`} />
         <h4 className="font-bold text-gray-900 text-base mb-1">{title}</h4>
         <p className="text-gray-600 text-sm leading-relaxed mb-4">{description}</p>
-        <button className="mt-auto flex items-center gap-1.5 text-xs font-semibold text-emerald-600 hover:text-emerald-700 bg-emerald-50 hover:bg-emerald-100 transition-colors px-3 py-1.5 rounded-lg">
+        <button
+            onClick={() => onDemo(videoId, title)}
+            className="mt-auto flex items-center gap-1.5 text-xs font-semibold text-emerald-600 hover:text-emerald-700 bg-emerald-50 hover:bg-emerald-100 transition-colors px-3 py-1.5 rounded-lg"
+        >
             <Play className="w-3 h-3 fill-emerald-600" />
             Ver Demo
         </button>
@@ -17,8 +82,15 @@ const FeatureGridItem = ({ icon: Icon, title, description, colorClass, number }:
 );
 
 export const MoreFeatures: React.FC = () => {
+    const [modal, setModal] = useState<{ videoId: string; title: string } | null>(null);
+
+    const openDemo = (videoId: string, title: string) => setModal({ videoId, title });
+    const closeDemo = () => setModal(null);
+
     return (
         <section className="relative py-24 overflow-hidden min-h-[800px] flex flex-col justify-center" style={{ backgroundImage: "url('/Funcionalidades-fundo.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+
+            {modal && <VideoModal videoId={modal.videoId} title={modal.title} onClose={closeDemo} />}
 
             {/* Background Shape Left (Cyan Blob) */}
             <div className="absolute top-0 left-0 w-[60%] h-full bg-cyan-400/5 rounded-br-[100px] -z-10 hidden md:block" />
@@ -55,6 +127,8 @@ export const MoreFeatures: React.FC = () => {
                                 colorClass="text-cyan-500"
                                 title="Controle de Parcelas" 
                                 description="Acompanhe cada parcela dos seus débitos e saiba exatamente quando cada uma vence."
+                                videoId="dQw4w9WgXcQ"
+                                onDemo={openDemo}
                             />
                             <FeatureGridItem 
                                 number={2}
@@ -62,6 +136,8 @@ export const MoreFeatures: React.FC = () => {
                                 colorClass="text-cyan-500"
                                 title="Todos os Cartões" 
                                 description="Centralize todos os seus cartões em um único lugar e visualize faturas e limites facilmente."
+                                videoId="dQw4w9WgXcQ"
+                                onDemo={openDemo}
                             />
                             <FeatureGridItem 
                                 number={3}
@@ -69,6 +145,8 @@ export const MoreFeatures: React.FC = () => {
                                 colorClass="text-cyan-500"
                                 title="Controle de Assinaturas" 
                                 description="Gerencie todas as suas assinaturas recorrentes e evite cobranças indesejadas."
+                                videoId="dQw4w9WgXcQ"
+                                onDemo={openDemo}
                             />
                             <FeatureGridItem 
                                 number={4}
@@ -76,6 +154,8 @@ export const MoreFeatures: React.FC = () => {
                                 colorClass="text-cyan-500"
                                 title="Gastos e Entradas" 
                                 description="Controle completo das suas receitas e despesas com categorias personalizáveis."
+                                videoId="dQw4w9WgXcQ"
+                                onDemo={openDemo}
                             />
                             <FeatureGridItem 
                                 number={5}
@@ -83,6 +163,8 @@ export const MoreFeatures: React.FC = () => {
                                 colorClass="text-cyan-500"
                                 title="Análise Inteligente com IA" 
                                 description="Módulos de análise financeira com inteligência artificial para insights personalizados."
+                                videoId="dQw4w9WgXcQ"
+                                onDemo={openDemo}
                             />
                             <FeatureGridItem 
                                 number={6}
@@ -90,6 +172,8 @@ export const MoreFeatures: React.FC = () => {
                                 colorClass="text-cyan-500"
                                 title="Investimentos e Cripto" 
                                 description="Controle e gerencie seus investimentos e criptoativos em um painel unificado."
+                                videoId="dQw4w9WgXcQ"
+                                onDemo={openDemo}
                             />
                         </div>
 
