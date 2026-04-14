@@ -1,46 +1,91 @@
-import React, { useState } from 'react';
-import { PhoneMockup } from './PhoneMockup';
-import { Bot, Sparkles, Layout, ShieldCheck, ArrowRight, MessageSquare, Mic, Paperclip, Play, X } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Sparkles, Layout, ShieldCheck, ArrowRight, Bot, Play, Pause } from 'lucide-react';
 
 const VideoPhoneMockup = () => {
+    const videoRef = useRef<HTMLVideoElement>(null);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [progress, setProgress] = useState(0);
+    const [currentTime, setCurrentTime] = useState(0);
+    const [duration, setDuration] = useState(0);
+
+    // Auto-play/pause based on viewport visibility
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        video.play().catch(() => {});
+                    } else {
+                        video.pause();
+                        video.currentTime = 0;
+                    }
+                });
+            },
+            { threshold: 0.5 }
+        );
+        observer.observe(video);
+        return () => observer.disconnect();
+    }, []);
+
+    const togglePlay = () => {
+        const video = videoRef.current;
+        if (!video) return;
+        if (video.paused) { video.play().catch(() => {}); }
+        else { video.pause(); }
+    };
+
+    const handleTimeUpdate = () => {
+        const video = videoRef.current;
+        if (!video || !video.duration) return;
+        setCurrentTime(video.currentTime);
+        setProgress((video.currentTime / video.duration) * 100);
+    };
+
+    const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const video = videoRef.current;
+        if (!video || !video.duration) return;
+        video.currentTime = (parseFloat(e.target.value) / 100) * video.duration;
+        setProgress(parseFloat(e.target.value));
+    };
+
+    const fmt = (t: number) => `${Math.floor(t / 60)}:${Math.floor(t % 60).toString().padStart(2, '0')}`;
 
     return (
-        <div className={`transition-all duration-700 ease-out z-40 origin-center ${isPlaying ? 'scale-110 md:scale-125' : 'scale-90 md:scale-100'}`}>
-             <PhoneMockup className="!h-[550px] !w-[280px] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] overflow-hidden bg-gray-900">
-                {!isPlaying ? (
-                    <div 
-                        className="relative w-full h-full flex items-center justify-center cursor-pointer group"
-                        onClick={() => setIsPlaying(true)}
-                    >
-                        <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style={{ backgroundImage: "url('/capa-video.png')" }}></div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent"></div>
-                        
-                        <div className="relative z-10 flex flex-col items-center gap-3 group-hover:scale-110 transition-transform duration-300">
-                            <div className="w-16 h-16 bg-white/10 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.2)] group-hover:bg-emerald-500 group-hover:border-emerald-500 transition-all duration-300">
-                                <Play size={24} className="text-white fill-white ml-1" />
-                            </div>
-                            <span className="text-white font-medium text-xs uppercase tracking-wider">Ver Vídeo</span>
-                        </div>
-                    </div>
-                ) : (
-                    <div className="w-full h-full bg-black relative flex items-center justify-center">
-                        <button 
-                            onClick={() => setIsPlaying(false)}
-                            className="absolute top-12 right-4 z-50 w-8 h-8 bg-black/50 hover:bg-black/80 rounded-full flex items-center justify-center text-white transition-colors"
-                        >
-                            <X size={16} />
-                        </button>
-                        <video
-                            className="w-full h-full object-cover"
-                            src="/videos/video-chat.mp4"
-                            autoPlay
-                            controls
-                            playsInline
-                        />
-                    </div>
-                )}
-             </PhoneMockup>
+        <div className="relative w-full max-w-xs rounded-3xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.35)] bg-black">
+            <video
+                ref={videoRef}
+                className="w-full h-auto object-cover"
+                src="/videos/video-chat.mp4"
+                muted
+                playsInline
+                loop
+                onTimeUpdate={handleTimeUpdate}
+                onLoadedMetadata={() => setDuration(videoRef.current?.duration ?? 0)}
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+            />
+            {/* Custom controls overlay */}
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-4 pb-5 pt-10">
+                <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="0.1"
+                    value={progress}
+                    onChange={handleSeek}
+                    className="w-full h-1 rounded-full cursor-pointer mb-3 accent-emerald-400"
+                />
+                <div className="flex items-center justify-between">
+                    <button onClick={togglePlay} className="text-white hover:text-emerald-400 transition-colors">
+                        {isPlaying ? <Pause size={18} /> : <Play size={18} />}
+                    </button>
+                    <span className="text-white/70 text-[11px] tabular-nums">
+                        {fmt(currentTime)} / {fmt(duration)}
+                    </span>
+                </div>
+            </div>
         </div>
     );
 };
@@ -126,15 +171,6 @@ export const Features: React.FC = () => {
                         {/* Inner Circle Decoration */}
                         <div className="absolute inset-8 border border-white/20 rounded-full"></div>
                         <div className="absolute inset-24 border border-white/10 rounded-full"></div>
-
-                        {/* Floating Elements */}
-                        <div className="absolute top-0 right-10 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center animate-float-delayed z-30">
-                            <MessageSquare className="text-emerald-500" size={24} />
-                        </div>
-                        
-                        <div className="absolute bottom-10 left-10 w-20 h-20 bg-white rounded-full shadow-lg flex items-center justify-center animate-float z-30">
-                            <Bot className="text-cyan-500" size={32} />
-                        </div>
 
                         {/* Phone */}
                         <VideoPhoneMockup />
