@@ -104,7 +104,7 @@ const FeatureItem = ({ icon: Icon, title, description }: { icon: any, title: str
 
 export const Features: React.FC = () => {
   return (
-    <section id="features" className="relative py-24 bg-white overflow-hidden">
+    <section id="ia" className="relative py-24 bg-white overflow-hidden">
         {/* Decorative Big Circle Left (Like Reference) */}
         <div className="absolute top-1/2 -left-48 transform -translate-y-1/2 w-[400px] h-[400px] bg-cyan-400 rounded-full opacity-10 blur-3xl pointer-events-none" />
         

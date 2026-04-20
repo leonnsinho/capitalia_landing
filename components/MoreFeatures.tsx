@@ -100,7 +100,7 @@ export const MoreFeatures: React.FC = () => {
     const closeDemo = () => setModal(null);
 
     return (
-        <section className="relative py-24 overflow-hidden min-h-[800px] flex flex-col justify-center" style={{ backgroundImage: "url('/Funcionalidades-fundo.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <section id="funcionalidades" className="relative py-24 overflow-hidden min-h-[800px] flex flex-col justify-center" style={{ backgroundImage: "url('/Funcionalidades-fundo.png')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
 
             {modal && <VideoModal video={modal.video} title={modal.title} onClose={closeDemo} />}
 

@@ -73,16 +73,28 @@ export const Footer: React.FC = () => {
                         </ul>
                     </div>
 
-                    {/* Column 3: Company */}
+                    {/* Column 3: Quick Links */}
                     <div>
-                        <h4 className="font-bold text-sm uppercase tracking-widest text-emerald-400 mb-5">Empresa</h4>
+                        <h4 className="font-bold text-sm uppercase tracking-widest text-emerald-400 mb-5">Links Rápidos</h4>
                         <ul className="space-y-3.5">
-                            {['Sobre Nós', 'Blog', 'Carreiras', 'Imprensa', 'Política de Privacidade', 'Termos de Uso'].map((item) => (
-                                <li key={item}>
-                                    <a href="#" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm flex items-center gap-2 group">
+                            {[
+                                { label: 'Home', id: 'home' },
+                                { label: 'IA', id: 'ia' },
+                                { label: 'Funcionalidades', id: 'funcionalidades' },
+                                { label: 'Interface', id: 'interface' },
+                                { label: 'Planos', id: 'planos' },
+                            ].map((item) => (
+                                <li key={item.label}>
+                                    <button
+                                        onClick={() => {
+                                            const el = document.getElementById(item.id);
+                                            if (el) window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
+                                        }}
+                                        className="text-gray-400 hover:text-emerald-400 transition-colors text-sm flex items-center gap-2 group"
+                                    >
                                         <span className="w-0 group-hover:w-2 h-0.5 bg-emerald-500 transition-all duration-300 rounded-full"></span>
-                                        {item}
-                                    </a>
+                                        {item.label}
+                                    </button>
                                 </li>
                             ))}
                         </ul>
@@ -94,7 +106,7 @@ export const Footer: React.FC = () => {
                         <ul className="space-y-3">
                             <li className="flex items-center gap-3 text-gray-400 text-sm">
                                 <Mail size={15} className="text-emerald-500 shrink-0" />
-                                suporte@capitaliahealth.com
+                                contato@stormcore.com.br
                             </li>
                             <li className="flex items-center gap-3 text-gray-400 text-sm">
                                 <MapPin size={15} className="text-emerald-500 shrink-0" />
@@ -114,9 +126,8 @@ export const Footer: React.FC = () => {
                         Seus dados estão protegidos com criptografia de ponta a ponta
                     </div>
                     <div className="flex gap-5">
-                        <a href="#" className="text-gray-600 hover:text-emerald-400 text-xs transition-colors">Privacidade</a>
-                        <a href="#" className="text-gray-600 hover:text-emerald-400 text-xs transition-colors">Termos</a>
-                        <a href="#" className="text-gray-600 hover:text-emerald-400 text-xs transition-colors">Cookies</a>
+                        <a href="https://app.capitaliahealth.com/privacidade.html" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-400 text-xs transition-colors">Privacidade</a>
+                        <a href="https://app.capitaliahealth.com/termos.html" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-400 text-xs transition-colors">Termos</a>
                     </div>
                 </div>
             </div>

@@ -6,7 +6,7 @@ export const Screenshots: React.FC = () => {
   const activeImg = hoveredImg ?? 1;
 
   return (
-    <section id="screenshots" className="relative py-16 bg-white overflow-hidden">
+    <section id="interface" className="relative py-16 bg-white overflow-hidden">
 
         {/* Decorative Background Circle */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] bg-emerald-400 rounded-full opacity-100 z-0 shadow-[0_0_100px_rgba(16,185,129,0.4)] animate-pulse" style={{ animationDuration: '8s' }} />

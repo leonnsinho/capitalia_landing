@@ -50,8 +50,9 @@ function App() {
     };
   }, []);
 
-  const wrap = (node: React.ReactNode, index: number) => (
+  const wrap = (node: React.ReactNode, index: number, id?: string) => (
     <div
+      id={id}
       ref={el => { wrapperRefs.current[index] = el; }}
       style={{
         position: 'sticky',
@@ -82,13 +83,13 @@ function App() {
   return (
     <div className="bg-gray-900">
       <Navbar />
-      {wrap(<Hero />, 0)}
-      {wrap(<Features />, 1)}
-      {wrap(<MoreFeatures />, 2)}
+      {wrap(<Hero />, 0, 'home')}
+      {wrap(<Features />, 1, 'ia')}
+      {wrap(<MoreFeatures />, 2, 'funcionalidades')}
       {wrap(<VideoSection />, 3)}
-      {wrap(<Screenshots />, 4)}
+      {wrap(<Screenshots />, 4, 'interface')}
       {/* Pricing scrolls normally — too tall to fit in a single viewport card */}
-      <div style={{ position: 'relative', zIndex: 6 }}>
+      <div id="planos" style={{ position: 'relative', zIndex: 6 }}>
         <Pricing />
       </div>
       {wrap(<Testimonials />, 5)}

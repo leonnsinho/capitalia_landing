@@ -80,7 +80,7 @@ const plans = [
 
 export const Pricing: React.FC = () => {
   return (
-    <section id="pricing" className="relative py-24 bg-white overflow-hidden">
+    <section id="planos" className="relative py-24 bg-white overflow-hidden">
 
       {/* Subtle background glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-emerald-400/5 rounded-full blur-3xl pointer-events-none" />

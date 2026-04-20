@@ -1,6 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
+const navLinks = [
+  { label: 'Home', id: 'home' },
+  { label: 'IA', id: 'ia' },
+  { label: 'Funcionalidades', id: 'funcionalidades' },
+  { label: 'Interface', id: 'interface' },
+  { label: 'Planos', id: 'planos' },
+];
+
+const scrollTo = (id: string) => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
+};
+
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -35,18 +49,18 @@ export const Navbar: React.FC = () => {
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-1">
-          {['Home', 'IA', 'Funcionalidades', 'Interface', 'Planos'].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+          {navLinks.map(({ label, id }) => (
+            <button
+              key={id}
+              onClick={() => scrollTo(id)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200
                 ${scrolled
                   ? 'text-gray-500 hover:text-emerald-600 hover:bg-emerald-50'
                   : 'text-gray-700 hover:text-emerald-600 hover:bg-white/60'
                 }`}
             >
-              {item}
-            </a>
+              {label}
+            </button>
           ))}
         </div>
 
@@ -82,15 +96,14 @@ export const Navbar: React.FC = () => {
           ${isOpen ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0'}`}
       >
         <div className="bg-white/90 backdrop-blur-xl border border-gray-100 shadow-xl rounded-2xl p-3 space-y-1">
-          {['Home', 'IA', 'Funcionalidades', 'Interface', 'Planos'].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className="block px-4 py-3 text-sm font-medium text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors"
-              onClick={() => setIsOpen(false)}
+          {navLinks.map(({ label, id }) => (
+            <button
+              key={id}
+              onClick={() => { scrollTo(id); setIsOpen(false); }}
+              className="block w-full text-left px-4 py-3 text-sm font-medium text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors"
             >
-              {item}
-            </a>
+              {label}
+            </button>
           ))}
           <div className="pt-1 pb-1">
             <a
