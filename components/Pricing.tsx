@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, X, Zap } from 'lucide-react';
+import { Check, X, Zap, Monitor } from 'lucide-react';
 
 const plans = [
   {
@@ -233,17 +233,37 @@ export const Pricing: React.FC = () => {
                 ))}
               </div>
 
-              {/* CTA Button */}
-              <a
-                href="https://capitaliahealth.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`w-full py-4 rounded-xl font-black text-xs uppercase tracking-[0.2em] transition-all relative z-10 flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 ${plan.buttonClass}`}
-              >
-                {plan.id === 'free' ? 'Começar grátis' : <><Zap className="w-3 h-3" /> Assinar agora</>}
-              </a>
+
             </div>
           ))}
+        </div>
+
+        {/* Download CTAs */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
+          <a
+            href="https://capitaliahealth.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 px-7 py-4 bg-gray-900 hover:bg-gray-800 text-white rounded-2xl font-bold text-sm transition-all hover:scale-[1.03] active:scale-95 shadow-lg"
+          >
+            <img src="/play-store.png" alt="Google Play" className="w-6 h-6 object-contain" />
+            <div className="text-left">
+              <p className="text-[10px] font-normal opacity-60 leading-none mb-0.5">Disponível no</p>
+              <p className="leading-none">Google Play</p>
+            </div>
+          </a>
+          <a
+            href="https://capitaliahealth.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 px-7 py-4 bg-gray-900 hover:bg-gray-800 text-white rounded-2xl font-bold text-sm transition-all hover:scale-[1.03] active:scale-95 shadow-lg"
+          >
+            <Monitor className="w-6 h-6 text-emerald-400" />
+            <div className="text-left">
+              <p className="text-[10px] font-normal opacity-60 leading-none mb-0.5">Acesse no</p>
+              <p className="leading-none">Computador</p>
+            </div>
+          </a>
         </div>
 
       </div>
