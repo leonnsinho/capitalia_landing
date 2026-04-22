@@ -9,10 +9,10 @@ const navLinks = [
   { label: 'Planos', id: 'planos' },
 ];
 
-const scrollTo = (id: string) => {
-  const el = document.getElementById(id);
-  if (!el) return;
-  window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
+// IDs are on sticky wrappers whose offsetTop can be unreliable.
+// Instead, dispatch a custom event handled by App.tsx which has the wrapperRefs.
+const scrollToSection = (id: string) => {
+  window.dispatchEvent(new CustomEvent('capitaliaNavigate', { detail: { id } }));
 };
 
 export const Navbar: React.FC = () => {
@@ -52,7 +52,7 @@ export const Navbar: React.FC = () => {
           {navLinks.map(({ label, id }) => (
             <button
               key={id}
-              onClick={() => scrollTo(id)}
+              onClick={() => scrollToSection(id)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200
                 ${scrolled
                   ? 'text-gray-500 hover:text-emerald-600 hover:bg-emerald-50'
@@ -99,7 +99,7 @@ export const Navbar: React.FC = () => {
           {navLinks.map(({ label, id }) => (
             <button
               key={id}
-              onClick={() => { scrollTo(id); setIsOpen(false); }}
+              onClick={() => { scrollToSection(id); setIsOpen(false); }}
               className="block w-full text-left px-4 py-3 text-sm font-medium text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors"
             >
               {label}

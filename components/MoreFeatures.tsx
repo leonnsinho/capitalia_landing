@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Zap, CreditCard, PieChart, Wallet, Repeat2, Bitcoin, Play, X } from 'lucide-react';
 
 // ---------------------------------------------------------------------------
-// Video Modal — supports YouTube IDs and local file paths (starting with /)
+// Video Modal — renders via portal directly into body to escape sticky/overflow
 // ---------------------------------------------------------------------------
 const VideoModal = ({ video, title, onClose }: { video: string; title: string; onClose: () => void }) => {
     const isLocal = video.startsWith('/');
@@ -17,25 +18,26 @@ const VideoModal = ({ video, title, onClose }: { video: string; title: string; o
         };
     }, [onClose]);
 
-    return (
+    return createPortal(
         <div
-            className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+            className="fixed inset-0 flex items-center justify-center p-4 md:p-8"
+            style={{ zIndex: 99999 }}
             onClick={onClose}
         >
-            {/* Backdrop */}
-            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
+            {/* Full-screen blur backdrop */}
+            <div className="absolute inset-0 bg-black/75 backdrop-blur-md" />
 
-            {/* Dialog */}
+            {/* Dialog — wider on large screens */}
             <div
-                className="relative w-full max-w-3xl rounded-2xl overflow-hidden shadow-2xl"
+                className="relative w-full max-w-5xl rounded-2xl overflow-hidden shadow-[0_30px_80px_-10px_rgba(0,0,0,0.7)]"
                 onClick={e => e.stopPropagation()}
             >
                 {/* Header */}
-                <div className="flex items-center justify-between bg-gray-900 px-5 py-3">
+                <div className="flex items-center justify-between bg-gray-950 px-5 py-3.5">
                     <span className="text-white font-semibold text-sm truncate">{title}</span>
                     <button
                         onClick={onClose}
-                        className="text-gray-400 hover:text-white transition-colors ml-4 shrink-0"
+                        className="text-gray-400 hover:text-white transition-colors ml-4 shrink-0 p-1 rounded-lg hover:bg-white/10"
                         aria-label="Fechar"
                     >
                         <X className="w-5 h-5" />
@@ -63,7 +65,8 @@ const VideoModal = ({ video, title, onClose }: { video: string; title: string; o
                     )}
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };
 

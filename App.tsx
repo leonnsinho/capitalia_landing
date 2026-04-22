@@ -50,6 +50,36 @@ function App() {
     };
   }, []);
 
+  // Navigation: calculate exact scroll target from wrapperRef heights
+  // (offsetTop on sticky elements is unreliable after scroll)
+  useEffect(() => {
+    // Maps section id -> how many wrapperRefs to sum to reach it
+    // wrapperRefs: [0]=Hero [1]=Features [2]=MoreFeatures [3]=VideoSection [4]=Screenshots [5]=Testimonials [6]=Footer
+    // Planos (Pricing) sits between index 4 and 5 in the DOM
+    const sectionEndIdx: Record<string, number> = {
+      home: 0,           // scroll to 0
+      ia: 1,             // sum refs[0]
+      funcionalidades: 2, // sum refs[0..1]
+      interface: 4,       // sum refs[0..3]
+      planos: 5,          // sum refs[0..4]
+    };
+
+    const handleNavigate = (e: Event) => {
+      const { id } = (e as CustomEvent<{ id: string }>).detail;
+      const endIdx = sectionEndIdx[id];
+      if (endIdx === undefined) return;
+      let top = 0;
+      for (let i = 0; i < endIdx; i++) {
+        const ref = wrapperRefs.current[i];
+        if (ref) top += ref.offsetHeight;
+      }
+      window.scrollTo({ top, behavior: 'smooth' });
+    };
+
+    window.addEventListener('capitaliaNavigate', handleNavigate);
+    return () => window.removeEventListener('capitaliaNavigate', handleNavigate);
+  }, []);
+
   const wrap = (node: React.ReactNode, index: number, id?: string) => (
     <div
       id={id}

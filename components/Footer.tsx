@@ -86,10 +86,7 @@ export const Footer: React.FC = () => {
                             ].map((item) => (
                                 <li key={item.label}>
                                     <button
-                                        onClick={() => {
-                                            const el = document.getElementById(item.id);
-                                            if (el) window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
-                                        }}
+                                        onClick={() => window.dispatchEvent(new CustomEvent('capitaliaNavigate', { detail: { id: item.id } }))}
                                         className="text-gray-400 hover:text-emerald-400 transition-colors text-sm flex items-center gap-2 group"
                                     >
                                         <span className="w-0 group-hover:w-2 h-0.5 bg-emerald-500 transition-all duration-300 rounded-full"></span>
