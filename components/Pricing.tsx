@@ -354,15 +354,15 @@ export const Pricing: React.FC = () => {
             </div>
           </a>
           <a
-            href="https://capitaliahealth.com/"
+            href="https://app.capitaliahealth.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 px-7 py-4 bg-gray-900 hover:bg-gray-800 text-white rounded-2xl font-bold text-sm transition-all hover:scale-[1.03] active:scale-95 shadow-lg"
+            className="flex items-center gap-3 px-7 py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-2xl font-bold text-sm transition-all hover:scale-[1.03] active:scale-95 shadow-lg shadow-emerald-500/30"
           >
-            <Monitor className="w-6 h-6 text-emerald-400" />
+            <Monitor className="w-6 h-6 text-white" />
             <div className="text-left">
-              <p className="text-[10px] font-normal opacity-60 leading-none mb-0.5">Acesse no</p>
-              <p className="leading-none">Computador</p>
+              <p className="text-[10px] font-normal opacity-80 leading-none mb-0.5">Acesse grátis</p>
+              <p className="leading-none">Cadastrar Grátis</p>
             </div>
           </a>
         </div>
