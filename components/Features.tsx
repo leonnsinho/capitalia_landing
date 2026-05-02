@@ -127,10 +127,10 @@ export const Features: React.FC = () => {
 
                     {/* CTA — desktop only (mobile CTA rendered below video) */}
                     <div className="hidden lg:block mt-8" style={anim('heroPop', '0.65s', '0.76s')}>
-                        <button className="group bg-gradient-to-r from-cyan-500 to-emerald-500 text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:-translate-y-1 transition-all flex items-center gap-2">
+                        <a href="https://app.capitaliahealth.com" target="_blank" rel="noopener noreferrer" className="group bg-gradient-to-r from-cyan-500 to-emerald-500 text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:-translate-y-1 transition-all inline-flex items-center gap-2">
                             CONHECER FUNCIONALIDADES
                             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -152,10 +152,10 @@ export const Features: React.FC = () => {
 
                 {/* CTA — mobile only, always last */}
                 <div className="block lg:hidden order-3 w-full flex justify-center pb-4" style={anim('heroPop', '0.65s', '0.76s')}>
-                    <button className="group bg-gradient-to-r from-cyan-500 to-emerald-500 text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:-translate-y-1 transition-all flex items-center gap-2">
+                    <a href="https://app.capitaliahealth.com" target="_blank" rel="noopener noreferrer" className="group bg-gradient-to-r from-cyan-500 to-emerald-500 text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:-translate-y-1 transition-all flex items-center gap-2">
                         CONHECER FUNCIONALIDADES
                         <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                    </button>
+                    </a>
                 </div>
 
             </div>
