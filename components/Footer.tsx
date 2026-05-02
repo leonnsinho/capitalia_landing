@@ -15,7 +15,7 @@ export const Footer: React.FC = () => {
                 {/* Top brand row */}
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-14 pb-10 border-b border-white/8">
                     <div className="flex items-center gap-3">
-                        <img src="/capitalia_logo.png" alt="Capitalia" className="h-12 w-auto object-contain brightness-0 invert" />
+                        <img src="/capitalia_logo.png" alt="Capitalia" className="h-12 w-auto object-contain" />
                         <span className="text-2xl font-bold tracking-tight" style={{ fontFamily: 'Rowdies, sans-serif' }}>
                             CAPITAL<span className="text-emerald-400">IA</span>
                         </span>
@@ -117,6 +117,9 @@ export const Footer: React.FC = () => {
                 <div className="border-t border-white/8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-gray-600 text-xs">
                         © {new Date().getFullYear()} Capitalia. Todos os direitos reservados.
+                    </p>
+                    <p className="text-gray-600 text-xs">
+                        Storm Core Ltda &nbsp;·&nbsp; CNPJ 64.104.432/0001-25
                     </p>
                     <div className="flex items-center gap-1.5 text-xs text-gray-600">
                         <Shield size={12} className="text-emerald-600" />

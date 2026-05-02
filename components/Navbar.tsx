@@ -110,8 +110,9 @@ export const Navbar: React.FC = () => {
               href="https://capitaliahealth.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="block w-full text-center bg-emerald-500 text-white px-6 py-3 rounded-xl font-bold text-sm shadow hover:bg-emerald-600 transition-colors"
+              className="flex items-center justify-center gap-2 w-full bg-emerald-500 text-white px-6 py-3 rounded-xl font-bold text-sm shadow hover:bg-emerald-600 transition-colors"
             >
+              <img src="/play-store.png" alt="Play Store" className="w-4 h-4 object-contain" />
               Baixar App
             </a>
           </div>
