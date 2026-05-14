@@ -1,6 +1,52 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Sparkles, Layout, ShieldCheck, ArrowRight, Bot, Play } from 'lucide-react';
 
+const SplitCTAButton: React.FC<{ href: string; label: string; className?: string }> = ({ href, label, className = '' }) => (
+  <>
+    <style>{`
+      .split-cta-btn {
+        border-radius: 8px;
+        transition: border-radius 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                    box-shadow 0.3s ease,
+                    transform 0.3s ease;
+      }
+      .split-cta-btn:hover {
+        border-radius: 50px;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(16,185,129,0.45);
+      }
+      .split-cta-btn .split-cta-label {
+        transition: transform 0.3s ease;
+      }
+      .split-cta-btn:hover .split-cta-label {
+        transform: translateX(-4px);
+      }
+      .split-cta-btn .split-cta-ball {
+        transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: rgba(255,255,255,0.2);
+        color: white;
+      }
+      .split-cta-btn:hover .split-cta-ball {
+        background-color: white;
+        color: #059669;
+        transform: translateX(6px) scale(1.1);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      }
+    `}</style>
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`split-cta-btn inline-flex items-center gap-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white px-7 py-4 font-bold shadow-lg shadow-emerald-500/30 ${className}`}
+    >
+      <span className="split-cta-label whitespace-nowrap">{label}</span>
+      <span className="split-cta-ball flex items-center justify-center w-8 h-8 rounded-full flex-shrink-0">
+        <ArrowRight size={15} />
+      </span>
+    </a>
+  </>
+);
+
 const VIDEO_ID = 'Z1JFXb9oFJ8';
 
 const VideoPhoneMockup = () => {
@@ -127,10 +173,7 @@ export const Features: React.FC = () => {
 
                     {/* CTA — desktop only (mobile CTA rendered below video) */}
                     <div className="hidden lg:block mt-8" style={anim('heroPop', '0.65s', '0.76s')}>
-                        <a href="https://app.capitaliahealth.com" target="_blank" rel="noopener noreferrer" className="group bg-gradient-to-r from-cyan-500 to-emerald-500 text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:-translate-y-1 transition-all inline-flex items-center gap-2">
-                            CONHECER FUNCIONALIDADES
-                            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                        </a>
+                        <SplitCTAButton href="https://app.capitaliahealth.com" label="CONHECER FUNCIONALIDADES" />
                     </div>
                 </div>
 
@@ -152,10 +195,7 @@ export const Features: React.FC = () => {
 
                 {/* CTA — mobile only, always last */}
                 <div className="block lg:hidden order-3 w-full flex justify-center pb-4" style={anim('heroPop', '0.65s', '0.76s')}>
-                    <a href="https://app.capitaliahealth.com" target="_blank" rel="noopener noreferrer" className="group bg-gradient-to-r from-cyan-500 to-emerald-500 text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:-translate-y-1 transition-all flex items-center gap-2">
-                        CONHECER FUNCIONALIDADES
-                        <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                    </a>
+                    <SplitCTAButton href="https://app.capitaliahealth.com" label="CONHECER FUNCIONALIDADES" />
                 </div>
 
             </div>

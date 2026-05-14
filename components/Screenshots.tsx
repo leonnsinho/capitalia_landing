@@ -33,27 +33,31 @@ export const Screenshots: React.FC = () => {
   return (
     <section ref={sectionRef} id="interface" className="relative py-16 overflow-hidden" style={{ backgroundColor: '#FCFCFC' }}>
 
-        {/* Decorative Background Circle */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] bg-emerald-400 rounded-full opacity-100 z-0 shadow-[0_0_100px_rgba(16,185,129,0.4)] animate-pulse" style={{ animationDuration: '8s' }} />
-
-        {/* Header */}
-        <div className="text-center mb-20 relative z-10 px-4">
-            <h2
-              className="text-3xl md:text-5xl font-bold text-gray-800 mb-4 tracking-tight"
-              style={anim('heroBlurUp', '0.85s', '0s')}
-            >
-                INTERFACE DO <span className="text-gray-800">CAPITAL<span className="text-emerald-500">IA</span></span>
-            </h2>
-            <div
-              className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-cyan-400 mx-auto rounded-full mb-6"
-              style={anim('heroFadeIn', '0.6s', '0.2s')}
-            />
+        {/* SVG wave blob — left side */}
+        <div className="absolute top-0 left-0 w-[55%] h-full overflow-hidden z-0 pointer-events-none">
+          <svg viewBox="0 0 800 1000" preserveAspectRatio="none" className="w-full h-full">
+            <path d="M0,0 C200,100 100,300 150,500 C200,700 50,800 0,1000 Z" fill="#28B889" />
+            <path d="M0,0 C100,200 0,400 100,600 C150,750 80,900 0,1000 Z" fill="#28B889" className="opacity-60" />
+          </svg>
         </div>
+
+        {/* SVG wave blob — right side */}
+        <div className="absolute top-0 right-0 w-[50%] h-full overflow-hidden z-0 pointer-events-none">
+          <svg viewBox="0 0 800 1000" preserveAspectRatio="none" className="w-full h-full">
+            <path d="M800,0 C600,150 700,400 650,600 C600,800 750,900 800,1000 Z" fill="#28B889" />
+          </svg>
+        </div>
+
+        {/* Floating donut rings */}
+        <div className="absolute top-10 left-[8%] w-20 h-20 rounded-full border-[10px] z-0 pointer-events-none hidden md:block" style={{ borderColor: '#28B889' }} />
+        <div className="absolute bottom-16 left-[15%] w-12 h-12 rounded-full border-[7px] z-0 pointer-events-none hidden md:block" style={{ borderColor: '#28B889' }} />
+        <div className="absolute top-1/3 right-[6%] w-28 h-28 rounded-full border-[12px] z-0 pointer-events-none hidden md:block" style={{ borderColor: '#28B889' }} />
+        <div className="absolute bottom-10 right-[12%] w-16 h-16 rounded-full border-[8px] z-0 pointer-events-none hidden md:block" style={{ borderColor: '#28B889' }} />
 
         {/* Mobile — phone mockup + arrow navigation */}
         <div className="flex md:hidden flex-col items-center gap-6 px-4" style={anim('heroFadeUp', '0.9s', '0.25s')}>
             <div className="relative">
-                <PhoneMockup className="!h-[500px] !w-[245px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.35)]">
+                <PhoneMockup className="!h-[500px] !w-[245px]">
                     <div className="relative w-full h-full">
                         {Array.from({ length: TOTAL }, (_, i) => i + 1).map((n) => (
                             <img
@@ -108,7 +112,7 @@ export const Screenshots: React.FC = () => {
                     ...anim('heroFadeUp', '0.9s', '0.25s'),
                   }}
                 >
-                    <PhoneMockup className="!h-[580px] !w-[285px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.35)]">
+                    <PhoneMockup className="!h-[580px] !w-[285px]">
                         <div className="relative w-full h-full">
                             {[1, 2, 3, 4, 5].map((n) => (
                                 <img

@@ -171,24 +171,8 @@ export const Hero: React.FC = () => {
               ))}
             </div>
 
-            {/* Main CTA — desktop only */}
-            <div
-              className="hidden md:block mb-8"
-              style={{ animation: `heroPop 0.75s ${ease} 0.44s both` }}
-            >
-              <a
-                href="https://app.capitaliahealth.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-emerald-500 rounded-full hover:bg-emerald-600 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-              >
-                Cadastrar grátis
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </a>
-            </div>
-
             {/* Platform Buttons */}
-            <div className="grid grid-cols-2 md:flex md:flex-wrap gap-2 md:gap-3 mb-8 md:mb-12">
+            <div className="grid grid-cols-2 md:flex md:flex-wrap gap-2 md:gap-3 mb-6 md:mb-4">
               {[
                 {
                   delay: '0.56s',
@@ -232,6 +216,51 @@ export const Hero: React.FC = () => {
                   {content}
                 </div>
               ))}
+            </div>
+
+            {/* Main CTA */}
+            <div className="hidden md:block" style={{ animation: `heroPop 0.75s ${ease} 0.82s both` }}>
+              <style>{`
+                .hero-cta-btn {
+                  border-radius: 8px;
+                  transition: border-radius 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                              box-shadow 0.3s ease,
+                              transform 0.3s ease;
+                }
+                .hero-cta-btn:hover {
+                  border-radius: 50px;
+                  transform: translateY(-2px);
+                  box-shadow: 0 10px 30px rgba(16,185,129,0.45);
+                }
+                .hero-cta-btn .hero-cta-label {
+                  transition: transform 0.3s ease;
+                }
+                .hero-cta-btn:hover .hero-cta-label {
+                  transform: translateX(-4px);
+                }
+                .hero-cta-btn .hero-cta-ball {
+                  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+                  background-color: rgba(255,255,255,0.2);
+                  color: white;
+                }
+                .hero-cta-btn:hover .hero-cta-ball {
+                  background-color: white;
+                  color: #059669;
+                  transform: translateX(6px) scale(1.1);
+                  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+                }
+              `}</style>
+              <a
+                href="https://app.capitaliahealth.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hero-cta-btn inline-flex items-center gap-3 px-7 py-4 text-lg font-bold text-white bg-emerald-500 shadow-lg shadow-emerald-500/30"
+              >
+                <span className="hero-cta-label whitespace-nowrap">Cadastrar grátis</span>
+                <span className="hero-cta-ball flex items-center justify-center w-8 h-8 rounded-full flex-shrink-0">
+                  <ArrowRight className="w-4 h-4" />
+                </span>
+              </a>
             </div>
           </div>
 
