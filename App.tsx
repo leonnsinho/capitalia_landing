@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Download } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Features } from './components/Features';
@@ -11,6 +12,8 @@ import { Testimonials } from './components/Testimonials';
 import { Footer } from './components/Footer';
 
 function App() {
+  const [showFab, setShowFab] = useState(false);
+
   // Section navigation
   useEffect(() => {
     const handleNavigate = (e: Event) => {
@@ -20,6 +23,18 @@ function App() {
     };
     window.addEventListener('capitaliaNavigate', handleNavigate);
     return () => window.removeEventListener('capitaliaNavigate', handleNavigate);
+  }, []);
+
+  // Show FAB only after scrolling past hero
+  useEffect(() => {
+    const hero = document.getElementById('home');
+    if (!hero) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowFab(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -34,6 +49,17 @@ function App() {
       <div id="planos"><Pricing /></div>
       <Testimonials />
       <Footer />
+
+      {/* Floating download button */}
+      <a
+        href="https://app.capitaliahealth.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="Cadastrar grátis"
+        className={`fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-emerald-500 text-white rounded-full shadow-lg shadow-emerald-500/40 hover:bg-emerald-600 hover:scale-110 hover:-translate-y-1 transition-all duration-300 ${showFab ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}
+      >
+        <Download size={22} />
+      </a>
     </div>
   );
 }
