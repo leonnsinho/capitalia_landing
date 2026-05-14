@@ -6,6 +6,7 @@ import { MoreFeatures } from './components/MoreFeatures';
 import { VideoSection } from './components/VideoSection';
 import { Screenshots } from './components/Screenshots';
 import { Pricing } from './components/Pricing';
+import { FacebookComments } from './components/FacebookComments';
 import { Testimonials } from './components/Testimonials';
 import { Footer } from './components/Footer';
 
@@ -29,6 +30,7 @@ function App() {
       <div id="funcionalidades"><MoreFeatures /></div>
       <div><VideoSection /></div>
       <div id="interface"><Screenshots /></div>
+      <FacebookComments />
       <div id="planos"><Pricing /></div>
       <Testimonials />
       <Footer />

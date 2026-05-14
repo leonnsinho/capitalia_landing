@@ -123,8 +123,10 @@ export const MoreFeatures: React.FC = () => {
     return (
         <section ref={sectionRef} id="funcionalidades" className="relative py-16 md:py-24 overflow-hidden min-h-[600px] md:min-h-[800px] flex flex-col justify-center">
             {/* Background — mobile vs desktop */}
-            <div className="absolute inset-0 block md:hidden" style={{ backgroundImage: "url('/funcionalidades-mobile.png')", backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }} />
+            <div className="absolute inset-0 block md:hidden" style={{ backgroundImage: "url('/funcionalidades-mobile.png')", backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', opacity: 0.35 }} />
             <div className="absolute inset-0 hidden md:block" style={{ backgroundImage: "url('/Funcionalidades-fundo.png')", backgroundSize: 'cover', backgroundPosition: 'center' }} />
+            {/* White wash — mobile only */}
+            <div className="absolute inset-0 bg-white/50 md:hidden" />
 
             {modal && <VideoModal video={modal.video} title={modal.title} onClose={closeDemo} />}
 

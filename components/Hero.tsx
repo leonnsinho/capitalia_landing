@@ -143,13 +143,33 @@ export const Hero: React.FC = () => {
               </span>
             </h1>
 
-            {/* Paragraph */}
+            {/* Paragraph — desktop only */}
             <p
-              className="text-gray-600 text-base sm:text-lg mb-6 md:mb-8 max-w-lg leading-relaxed text-center md:text-left font-medium md:font-normal"
+              className="hidden md:block text-gray-600 text-base sm:text-lg mb-6 md:mb-8 max-w-lg leading-relaxed text-center md:text-left font-medium md:font-normal"
               style={{ animation: `heroFadeUp 0.8s ${ease} 0.32s both` }}
             >
               Transforme suas ideias financeiras em realidade. O Capitalia oferece insights poderosos, design responsivo e uma interface elegante para gerenciar seu patrimônio.
             </p>
+
+            {/* Benefit badges — mobile centered, desktop left-aligned above CTA */}
+            <div
+              className="flex justify-center md:justify-start gap-2 flex-wrap mb-6 md:mb-4"
+              style={{ animation: `heroFadeUp 0.8s ${ease} 0.32s both` }}
+            >
+              {[
+                { label: 'Sem publicidade', emoji: '🚫' },
+                { label: '7 dias grátis',   emoji: '🎁' },
+                { label: 'Fácil e intuitivo', emoji: '✨' },
+              ].map(({ label, emoji }) => (
+                <span
+                  key={label}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-emerald-200 text-gray-700 text-xs font-semibold shadow-sm"
+                >
+                  <span>{emoji}</span>
+                  {label}
+                </span>
+              ))}
+            </div>
 
             {/* Main CTA — desktop only */}
             <div
