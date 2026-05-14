@@ -125,7 +125,7 @@ const COMMENTS: Comment[] = [
         bg: '#ad1457',
         initials: 'PN',
         time: '6 d',
-        text: 'Isso mesmo! A integração bancária é o diferencial. Outros apps cobram caro por isso.',
+        text: 'Exatamente! Os gráficos e relatórios são incríveis, nunca tive tanta clareza dos meus gastos assim.',
         likes: 16,
       },
     ],
@@ -253,7 +253,7 @@ export const FacebookComments: React.FC = () => {
     visible ? { animation: `${keyframe} ${duration} ${ease} ${delay} both` } : { opacity: 0 };
 
   return (
-    <section ref={sectionRef} className="relative py-10 md:py-24 overflow-hidden" style={{ backgroundColor: '#F0F2F5' }}>
+    <section ref={sectionRef} className="relative py-10 md:py-24 overflow-hidden bg-white">
       {/* Header */}
       <div className="max-w-2xl mx-auto px-5 mb-6 md:mb-10 text-center">
         <div className="flex items-center justify-center gap-2 mb-3" style={anim('heroFadeUp', '0.6s', '0s')}>
@@ -280,7 +280,7 @@ export const FacebookComments: React.FC = () => {
           {GROUPS.map((group, groupIdx) => (
             <div
               key={groupIdx}
-              className="flex-none w-[calc(100%-2rem)] snap-center bg-white rounded-2xl shadow-sm px-4 pb-4"
+              className="flex-none w-[calc(100%-2rem)] snap-center bg-white rounded-2xl shadow-sm px-4 pb-4 border border-emerald-500"
             >
               {group.map((comment, idx) => (
                 <CommentCard key={comment.id} comment={comment} isLast={idx === group.length - 1} />
@@ -304,7 +304,7 @@ export const FacebookComments: React.FC = () => {
       <div className="hidden md:flex max-w-6xl mx-auto px-4 gap-4 items-center">
         {/* Column 1 */}
         <div
-          className="flex-1 bg-white rounded-2xl shadow-sm px-4 pb-5 self-start"
+          className="flex-1 bg-white rounded-2xl shadow-sm px-4 pb-5 self-start border border-emerald-500"
           style={anim('heroPop', '0.65s', '0.25s')}
         >
           {GROUPS[0].map((comment, idx) => (
@@ -326,7 +326,7 @@ export const FacebookComments: React.FC = () => {
 
         {/* Column 3 */}
         <div
-          className="flex-1 bg-white rounded-2xl shadow-sm px-4 pb-5 self-start"
+          className="flex-1 bg-white rounded-2xl shadow-sm px-4 pb-5 self-start border border-emerald-500"
           style={anim('heroPop', '0.65s', '0.4s')}
         >
           {GROUPS[1].map((comment, idx) => (

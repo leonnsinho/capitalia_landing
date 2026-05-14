@@ -1,9 +1,47 @@
-import React from 'react';
-import { MapPin, Mail, Shield, Zap, Users } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { MapPin, Mail, Shield, X } from 'lucide-react';
+
+const FEATURES = [
+    { label: 'Gastos e Entradas',         video: 'KDdenyrbvPE' },
+    { label: 'Todos os Cartões',           video: 'sdxcDIiYAyw' },
+    { label: 'Controle de Parcelas',       video: '9QMWoWA9jbg' },
+    { label: 'Controle de Assinaturas',    video: 'eJVMB5je7YI' },
+    { label: 'Análise Inteligente com IA', video: 'Z1JFXb9oFJ8' },
+    { label: 'Investimentos e Cripto',     video: 'fasA47mqPRg' },
+];
+
+const FooterVideoModal = ({ title, video, onClose }: { title: string; video: string; onClose: () => void }) => {
+    useEffect(() => {
+        const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+        document.addEventListener('keydown', onKey);
+        document.body.style.overflow = 'hidden';
+        return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = ''; };
+    }, [onClose]);
+    return createPortal(
+        <div className="fixed inset-0 flex items-center justify-center p-4 md:p-8" style={{ zIndex: 99999 }} onClick={onClose}>
+            <div className="absolute inset-0 bg-black/75 backdrop-blur-md" />
+            <div className="relative w-full max-w-5xl rounded-2xl overflow-hidden shadow-[0_30px_80px_-10px_rgba(0,0,0,0.7)]" onClick={e => e.stopPropagation()}>
+                <div className="flex items-center justify-between bg-gray-950 px-5 py-3.5">
+                    <span className="text-white font-semibold text-sm truncate">{title}</span>
+                    <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors ml-4 shrink-0 p-1 rounded-lg hover:bg-white/10" aria-label="Fechar">
+                        <X className="w-5 h-5" />
+                    </button>
+                </div>
+                <div className="relative w-full bg-black" style={{ paddingBottom: '56.25%' }}>
+                    <iframe className="absolute inset-0 w-full h-full" src={`https://www.youtube.com/embed/${video}?autoplay=1&rel=0`} title={title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+                </div>
+            </div>
+        </div>,
+        document.body
+    );
+};
 
 export const Footer: React.FC = () => {
+    const [modal, setModal] = useState<{ title: string; video: string } | null>(null);
     return (
         <footer className="bg-gray-950 text-white pt-20 pb-10 relative overflow-hidden rounded-t-[3.5rem] shadow-[0_-20px_60px_-15px_rgba(0,0,0,0.25)] mt-0">
+            {modal && <FooterVideoModal title={modal.title} video={modal.video} onClose={() => setModal(null)} />}
 
             {/* Ambient Background Glows */}
             <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-emerald-500/8 rounded-full blur-3xl pointer-events-none"></div>
@@ -52,22 +90,19 @@ export const Footer: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Column 2: Product */}
+                    {/* Column 2: Funcionalidades */}
                     <div>
-                        <h4 className="font-bold text-sm uppercase tracking-widest text-emerald-400 mb-5">Produto</h4>
+                        <h4 className="font-bold text-sm uppercase tracking-widest text-emerald-400 mb-5">Funcionalidades</h4>
                         <ul className="space-y-3.5">
-                            {[
-                                { label: 'Funcionalidades', icon: Zap },
-                                { label: 'Planos e Preços', icon: null },
-                                { label: 'Segurança', icon: Shield },
-                                { label: 'Atualizações', icon: null },
-                                { label: 'Para Empresas', icon: Users },
-                            ].map(({ label, icon: Icon }) => (
+                            {FEATURES.map(({ label, video }) => (
                                 <li key={label}>
-                                    <a href="#" className="text-gray-400 hover:text-emerald-400 transition-colors text-sm flex items-center gap-2 group">
+                                    <button
+                                        onClick={() => setModal({ title: label, video })}
+                                        className="text-gray-400 hover:text-emerald-400 transition-colors text-sm flex items-center gap-2 group text-left"
+                                    >
                                         <span className="w-0 group-hover:w-2 h-0.5 bg-emerald-500 transition-all duration-300 rounded-full"></span>
                                         {label}
-                                    </a>
+                                    </button>
                                 </li>
                             ))}
                         </ul>
