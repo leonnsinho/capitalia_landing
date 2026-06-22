@@ -52,10 +52,10 @@ function App() {
 
       {/* Floating download button */}
       <a
-        href="https://app.capitaliahealth.com"
+        href="https://play.google.com/store/apps/details?id=com.capitalia.app"
         target="_blank"
         rel="noopener noreferrer"
-        title="Cadastrar grátis"
+        title="Baixar na Google Play"
         className={`fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-emerald-500 text-white rounded-full shadow-lg shadow-emerald-500/40 hover:bg-emerald-600 hover:scale-110 hover:-translate-y-1 transition-all duration-300 ${showFab ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}
       >
         <Download size={22} />

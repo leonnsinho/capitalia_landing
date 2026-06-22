@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { MapPin, Mail, Shield, X } from 'lucide-react';
+import { Phone, Mail, Shield, X } from 'lucide-react';
 
 const FEATURES = [
     { label: 'Gastos e Entradas',         video: 'KDdenyrbvPE' },
@@ -63,7 +63,7 @@ export const Footer: React.FC = () => {
                     </p>
                     {/* Play Store CTA */}
                     <a
-                        href="https://capitaliahealth.com/"
+                        href="https://play.google.com/store/apps/details?id=com.capitalia.app"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-3 bg-white/5 hover:bg-emerald-500/15 border border-white/10 hover:border-emerald-500/40 transition-all duration-300 rounded-xl px-4 py-3 group shrink-0"
@@ -132,17 +132,21 @@ export const Footer: React.FC = () => {
                         </ul>
                     </div>
 
-                    {/* Column 4: Contact */}
+                    {/* Column 4: Suporte */}
                     <div>
-                        <h4 className="font-bold text-sm uppercase tracking-widest text-emerald-400 mb-5">Contato</h4>
+                        <h4 className="font-bold text-sm uppercase tracking-widest text-emerald-400 mb-5">Suporte</h4>
                         <ul className="space-y-3">
-                            <li className="flex items-center gap-3 text-gray-400 text-sm">
-                                <Mail size={15} className="text-emerald-500 shrink-0" />
-                                contato@stormcore.com.br
+                            <li>
+                                <a href="mailto:contato@stormcore.com.br" className="flex items-center gap-3 text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                                    <Mail size={15} className="text-emerald-500 shrink-0" />
+                                    contato@stormcore.com.br
+                                </a>
                             </li>
-                            <li className="flex items-center gap-3 text-gray-400 text-sm">
-                                <MapPin size={15} className="text-emerald-500 shrink-0" />
-                                Brasil
+                            <li>
+                                <a href="https://wa.me/5512992526242" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-400 hover:text-emerald-400 transition-colors text-sm">
+                                    <Phone size={15} className="text-emerald-500 shrink-0" />
+                                    +55 12 99252-6242
+                                </a>
                             </li>
                         </ul>
                     </div>

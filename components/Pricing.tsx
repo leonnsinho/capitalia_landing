@@ -9,7 +9,7 @@ const plans = [
     period: '',
     limit: 'Para sempre gratuito',
     planImage: '/icone_planos/free.png',
-    containerClass: 'bg-gradient-to-br from-slate-50 to-slate-200 shadow-xl',
+    containerClass: 'bg-gradient-to-br from-slate-50 to-slate-200',
     textClass: 'text-slate-700',
     buttonClass: 'bg-slate-300 hover:bg-slate-400 text-slate-800',
     borderClass: 'animate-silver-border',
@@ -35,7 +35,7 @@ const plans = [
     limit: 'Acesso completo mensal',
     planImage: '/icone_planos/pro.png',
     popular: true,
-    containerClass: 'bg-gradient-to-br from-[#1a1200] via-[#2d1f00] to-[#1a1200] text-white shadow-2xl shadow-amber-900/30',
+    containerClass: 'bg-gradient-to-br from-[#1a1200] via-[#2d1f00] to-[#1a1200] text-white',
     textClass: 'text-amber-100',
     buttonClass: 'bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-amber-400 hover:via-yellow-300 hover:to-amber-400 text-amber-950 font-black shadow-lg shadow-amber-500/40',
     borderClass: 'animate-gold-border',
@@ -60,7 +60,7 @@ const plans = [
     discount: '40% OFF',
     limit: 'Melhor custo-benefício',
     planImage: '/icone_planos/pro_annual.png',
-    containerClass: 'bg-gradient-to-br from-[#021c15] via-[#064e3b] to-[#022c22] text-white shadow-2xl',
+    containerClass: 'bg-gradient-to-br from-[#021c15] via-[#064e3b] to-[#022c22] text-white',
     textClass: 'text-emerald-50',
     buttonClass: 'bg-gradient-to-r from-emerald-500 via-emerald-400 to-emerald-500 hover:from-emerald-400 hover:via-emerald-300 hover:to-emerald-400 text-emerald-950 font-black shadow-lg shadow-emerald-900/40',
     borderClass: 'animate-emerald-border',
@@ -342,7 +342,7 @@ export const Pricing: React.FC = () => {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12"
              style={anim('heroFadeUp', '0.7s', '0.72s')}>
           <a
-            href="https://capitaliahealth.com/"
+            href="https://play.google.com/store/apps/details?id=com.capitalia.app"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 px-7 py-4 bg-gray-900 hover:bg-gray-800 text-white rounded-2xl font-bold text-sm transition-all hover:scale-[1.03] active:scale-95 shadow-lg"

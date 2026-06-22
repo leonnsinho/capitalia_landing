@@ -67,7 +67,7 @@ export const Navbar: React.FC = () => {
         {/* CTA */}
         <div className="hidden md:flex items-center gap-3">
           <a
-            href="https://capitaliahealth.com/"
+            href="https://play.google.com/store/apps/details?id=com.capitalia.app"
             target="_blank"
             rel="noopener noreferrer"
             className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 hover:scale-105 active:scale-95
@@ -107,7 +107,7 @@ export const Navbar: React.FC = () => {
           ))}
           <div className="pt-1 pb-1">
             <a
-              href="https://capitaliahealth.com/"
+              href="https://play.google.com/store/apps/details?id=com.capitalia.app"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 w-full bg-emerald-500 text-white px-6 py-3 rounded-xl font-bold text-sm shadow hover:bg-emerald-600 transition-colors"
