@@ -6,7 +6,7 @@ const navLinks = [
   { label: 'IA', id: 'ia' },
   { label: 'Funcionalidades', id: 'funcionalidades' },
   { label: 'Interface', id: 'interface' },
-  { label: 'Planos', id: 'planos' },
+  { label: 'Oferta', id: 'planos' },
 ];
 
 // IDs are on sticky wrappers whose offsetTop can be unreliable.
