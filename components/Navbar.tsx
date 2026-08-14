@@ -84,6 +84,8 @@ export const Navbar: React.FC = () => {
         {/* Mobile burger */}
         <button
           onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
+          aria-expanded={isOpen}
           className="md:hidden p-2 rounded-xl text-gray-600 hover:text-emerald-500 hover:bg-emerald-50 transition-colors"
         >
           {isOpen ? <X size={22} /> : <Menu size={22} />}
